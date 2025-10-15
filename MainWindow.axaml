@@ -1,0 +1,91 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="InventorySystem.MainWindow"
+        Width="980" Height="640"
+        Title="Inventory System">
+
+  <!-- 4 rækker: header, ordrelister, stock-grid, footer -->
+  <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*,*">
+
+    <!-- HEADER -->
+    <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+               Margin="12" FontSize="20" FontWeight="Bold"
+               Text="Inventory System – Orders &amp; Revenue"/>
+
+    <!-- VENSTRE: QUEUED ORDERS -->
+    <StackPanel Grid.Row="1" Grid.Column="0" Margin="12">
+      <TextBlock FontWeight="Bold" Text="Queued Orders" Margin="0,0,0,6"/>
+      <DataGrid ItemsSource="{Binding QueuedOrders}"
+                AutoGenerateColumns="False"
+                HeadersVisibility="All"
+                IsReadOnly="True"
+                GridLinesVisibility="All"
+                ColumnWidth="*"
+                Height="260">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" />
+          <DataGridTextColumn Header="Time"
+                              Binding="{Binding Time, StringFormat=\{0:dd/MM/yyyy HH.mm.ss\}}" />
+          <DataGridTextColumn Header="#Lines" Binding="{Binding LinesCount}" />
+          <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </StackPanel>
+
+    <!-- HØJRE: PROCESSED ORDERS -->
+    <StackPanel Grid.Row="1" Grid.Column="1" Margin="12">
+      <TextBlock FontWeight="Bold" Text="Processed Orders" Margin="0,0,0,6"/>
+      <DataGrid ItemsSource="{Binding ProcessedOrders}"
+                AutoGenerateColumns="False"
+                HeadersVisibility="All"
+                IsReadOnly="True"
+                GridLinesVisibility="All"
+                ColumnWidth="*"
+                Height="260">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" />
+          <DataGridTextColumn Header="Time"
+                              Binding="{Binding Time, StringFormat=\{0:dd/MM/yyyy HH.mm.ss\}}" />
+          <DataGridTextColumn Header="#Lines" Binding="{Binding LinesCount}" />
+          <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </StackPanel>
+
+    <!-- STOCK GRID (spænder over begge kolonner) -->
+    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="12,0,12,6">
+      <TextBlock FontWeight="Bold" Text="Inventory Stock" Margin="0,6,0,6"/>
+      <DataGrid ItemsSource="{Binding StockRows}"
+                AutoGenerateColumns="False"
+                HeadersVisibility="All"
+                IsReadOnly="True"
+                GridLinesVisibility="All"
+                ColumnWidth="*"
+                Height="180">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Item" Binding="{Binding Item}" />
+          <DataGridTextColumn Header="Amount" Binding="{Binding AmountWithUnit}" />
+          <DataGridTextColumn Header="Price / Unit" Binding="{Binding PriceDisplay}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </StackPanel>
+
+    <!-- FOOTER -->
+    <StackPanel Grid.Row="3" Grid.Column="0"
+                Orientation="Horizontal" Margin="12" Spacing="10">
+      <Button Content="Process Next Order"
+              Command="{Binding ProcessNextOrderCommand}"/>
+      <Button Content="Undo Last Process"
+              Command="{Binding UndoLastProcessCommand}"/>
+      <TextBlock VerticalAlignment="Center" Text="Total Revenue:"/>
+      <TextBlock VerticalAlignment="Center" FontWeight="Bold"
+                 Text="{Binding TotalRevenue, StringFormat=C}"/>
+    </StackPanel>
+
+    <StackPanel Grid.Row="3" Grid.Column="1" Margin="12">
+      <TextBlock FontWeight="Bold" Text="Low Stock (&lt; 5)"/>
+      <ItemsControl ItemsSource="{Binding LowStockDisplay}"/>
+    </StackPanel>
+
+  </Grid>
+</Window>
