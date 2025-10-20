@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR
   %% Activity 34 - Visual relation between concepts (not UML)
 
