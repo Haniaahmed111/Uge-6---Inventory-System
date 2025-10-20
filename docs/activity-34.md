@@ -1,17 +1,18 @@
 # Activity 34 – Visual relation between concepts
 
 ```mermaid
+```
 
 flowchart LR
   %% Activity 34 – Visual relation between concepts (ikke UML-klasser)
-  inv[inventory]
-  item[item]
-  ppu[price per unit]
-  bulk[bulk item]
-  stock[stock (e.g. 3 pens)]
-  cust[customer]
-  order[order]
-  ob[order book]
+  inv[Inventory]
+  item[Item]
+  ppu[Price per unit]
+  bulk[Bulk item]
+  stock[Stock (3 pens)]
+  cust[Customer]
+  order[Order]
+  ob[Order book]
 
   inv -->|has many| item
   item -->|has a| ppu
