@@ -18,3 +18,4 @@ flowchart LR
   inv -->|tracks / has| stock
   cust -->|places| order
   ob -->|queues / contains| order
+```
