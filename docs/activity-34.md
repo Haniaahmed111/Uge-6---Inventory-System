@@ -1,5 +1,7 @@
 # Activity 34 – Visual relation between concepts
-'''
+
+```mermaid
+
 flowchart LR
   %% Activity 34 – Visual relation between concepts (ikke UML-klasser)
   inv[inventory]
