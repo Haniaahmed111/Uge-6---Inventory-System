@@ -1,20 +1,11 @@
 ```mermaid
 flowchart LR
-  %% Activity 34 - Visual relation between concepts (not UML)
+  inv[Inventory] -->|has many| item[Item]
+  bulk[Bulk item] -->|is an| item
+  item -->|has a| ppu[Price per unit]
+  inv -->|tracks / has| stock[Stock (e.g., 3 pens)]
+  stock -. of .-> item
+  cust[Customer] -->|places| order[Order]
+  ob[Order book] -->|queues / contains| order
 
-  inv[Inventory]
-  item[Item]
-  ppu[Price per unit]
-  bulk[Bulk item]
-  stock[Stock eg 3 pens]
-  cust[Customer]
-  order[Order]
-  ob[Order book]
-
-  inv -->|has many| item
-  item -->|has a| ppu
-  bulk -->|is a| item
-  inv -->|tracks / has| stock
-  cust -->|places| order
-  ob  -->|queues / contains| order
 
